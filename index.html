@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Manager</title>
+</head>
+<body>
+  <script>
+    // Array of book objects
+    const books = [
+      { title: 'Catcher in the Rye', author: 'J.D. Salinger', isAvailable: true },
+      { title: 'Lord of the Rings', author: 'J.R.R. Tolkien', isAvailable: false },
+      { title: 'Harry Potter', author: 'J.K. Rowling', isAvailable: true }
+    ];
+
+    // Function to list all books
+    function listBooks() {
+      console.log("📚 Library Books:");
+      for (let i = 0; i < books.length; i++) {
+        if (books[i].isAvailable) {
+          console.log(books[i].title + " by " + books[i].author + " - Available");
+        } else {
+          console.log(books[i].title + " by " + books[i].author + " - Borrowed");
+        }
+      }
+      console.log("------------");
+    }
+
+    // Function to borrow a book
+    function borrowBook(title) {
+      for (let i = 0; i < books.length; i++) {
+        if (books[i].title === title) {
+          if (books[i].isAvailable) {
+            books[i].isAvailable = false;
+            console.log("✅ You borrowed: " + books[i].title);
+          } else {
+            console.log("❌ Sorry, " + books[i].title + " is already borrowed.");
+          }
+          return; // stop once book is found
+        }
+      }
+      console.log("❌ Book not found in library.");
+    }
+
+    // Function to return a book
+    function returnBook(title) {
+      for (let i = 0; i < books.length; i++) {
+        if (books[i].title === title) {
+          if (!books[i].isAvailable) {
+            books[i].isAvailable = true;
+            console.log("✅ You returned: " + books[i].title);
+          } else {
+            console.log("❌ " + books[i].title + " was not borrowed.");
+          }
+          return; // stop once book is found
+        }
+      }
+      console.log("❌ Book not found in library.");
+    }
+
+    // Example usage
+    listBooks();
+    borrowBook("Harry Potter");
+    listBooks();
+    returnBook("Harry Potter");
+    listBooks();
+    borrowBook("Lord of the Rings");
+    listBooks();
+  </script>
+</body>
+</html>
